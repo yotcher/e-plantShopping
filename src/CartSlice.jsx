@@ -25,6 +25,7 @@ export const CartSlice = createSlice({
     updateQuantity: (state, action) => {
         const {name, amount} = action.payload
         const item = state.items.find(item => item.name === name)
+        console.log(item)
         if(item){
             item.quantity = amount
         }
