@@ -16,6 +16,14 @@ const CartItem = ({ onContinueShopping }) => {
     return totalAmount
   };
 
+  const calculateNumberPlants = () => {
+    let totalAmount = 0;
+    cart.forEach(element => {
+      totalAmount += element.quantity
+    });
+    return totalAmount
+  };
+
   const handleContinueShopping = (e) => {
     onContinueShopping(e)
   };
@@ -43,8 +51,7 @@ const CartItem = ({ onContinueShopping }) => {
   };
 
   // Calculate total cost based on quantity for an item
-  const calculateTotalCost = (item) => {
-    console.log(item)
+  const calculateTotalCost = (item) => {console.log(item)
     return parseInt(item.cost.substring(1)) * item.quantity
   };
 
@@ -55,6 +62,7 @@ const CartItem = ({ onContinueShopping }) => {
   return (
     <div className="cart-container">
       <h2 style={{ color: 'black' }}>Total Cart Amount: ${calculateTotalAmount()}</h2>
+      <h2 style={{ color: 'black' }}>Number Of Plants: {calculateNumberPlants()}</h2>
       <div>
         {cart.map(item => (
           <div className="cart-item" key={item.name}>
