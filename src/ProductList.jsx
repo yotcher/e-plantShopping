@@ -6,7 +6,7 @@ import { addItem, removeItem, updateQuantity } from './CartSlice'
 function ProductList() {
     const [showCart, setShowCart] = useState(false); 
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
-    const [addedToCart, setAddedToCart] = useState({});
+    const addedToCart = useSelector(state => state.cart.addedToCart);
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart.items);
     const plantsArray = [
@@ -312,7 +312,9 @@ const handlePlantsClick = (e) => {
                             <div className="product-title">{plant.name}</div>
                             <div className="product-title">{plant.description}</div>
                             <div className="product-title">{plant.cost}</div>
-                            <button  className="product-button" onClick={() => handleAddToCart(plant)}>Add to Cart</button>
+                            <button className={`product-button ${addedToCart[plant.name] ? 'added-to-cart': ''}`}
+                             onClick={() => handleAddToCart(plant)} 
+                             disabled={addedToCart[plant.name]}>Add{addedToCart[plant.name] && "ed"} to Cart</button>
                         </div>
                         ))}
                     </div>
